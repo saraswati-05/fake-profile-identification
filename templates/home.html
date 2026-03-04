@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+  <section class="hero card">
+    <h1>Detect Fake Social Media Accounts</h1>
+    <p>End‑to‑end B.Tech‑level project: register & login with admin approval, train a simple ML model, visualize metrics, and test on sample or your own CSV — all in one neat app.</p>
+    <div class="cta-row">
+      {% if not current_user.is_authenticated %}
+        <a class="btn primary" href="{{ url_for('register') }}">Get Started</a>
+        <a class="btn" href="{{ url_for('login') }}">I already have an account</a>
+      {% else %}
+        <a class="btn primary" href="{{ url_for('predict') }}">Go to Testing</a>
+        {% if current_user.is_admin %}
+          <a class="btn accent" href="{{ url_for('train') }}">Train Model</a>
+        {% endif %}
+      {% endif %}
+    </div>
+  </section>
+
+  <section class="section grid cols-3">
+    <div class="card card-pad">
+      <h3>Simple Auth Flow</h3>
+      <p>Students register with 6 attributes, login securely, and get access once an admin approves.</p>
+    </div>
+    <div class="card card-pad">
+      <h3>One‑Click Training</h3>
+      <p>Use the included dataset or upload your own to train a RandomForest model suitable for demos.</p>
+    </div>
+    <div class="card card-pad">
+      <h3>Clear Visuals</h3>
+      <p>Confusion Matrix, ROC Curve, and Feature Importance help explain the model performance.</p>
+    </div>
+  </section>
+
+  <section class="section card card-pad small">
+    <span class="kbd">Tip</span> Default admin is <strong>admin@example.com</strong> / <strong>admin123</strong> — change it after first login.
+  </section>
+{% endblock %}

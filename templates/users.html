@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>All Users</h2>
+<table class="table">
+  <thead>
+    <tr><th>ID</th><th>Name</th><th>Email</th><th>Approved</th><th>Admin</th></tr>
+  </thead>
+  <tbody>
+    {% for u in users %}
+      <tr>
+        <td>{{ u.id }}</td>
+        <td>{{ u.full_name }}</td>
+        <td>{{ u.email }}</td>
+        <td>{{ "Yes" if u.is_approved else "No" }}</td>
+        <td>{{ "Yes" if u.is_admin else "No" }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

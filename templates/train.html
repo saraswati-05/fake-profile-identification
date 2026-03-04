@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Training</h2>
+<p>Click the button to train the model using <code>data/training.csv</code> (or your uploaded CSV).</p>
+<form method="post" action="{{ url_for('run_training') }}">
+  <button type="submit">Run Training</button>
+</form>
+<p>After training, check <a href="{{ url_for('graphs') }}">Graphs</a>.</p>
+{% endblock %}

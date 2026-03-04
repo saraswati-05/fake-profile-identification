@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Training Graphs</h2>
+<ul>
+  <li><img src="{{ url_for('static', filename='plots/confusion_matrix.png') }}" alt="Confusion Matrix" style="max-width:100%"></li>
+  <li><img src="{{ url_for('static', filename='plots/roc_curve.png') }}" alt="ROC Curve" style="max-width:100%"></li>
+  <li><img src="{{ url_for('static', filename='plots/feature_importance.png') }}" alt="Feature Importance" style="max-width:100%"></li>
+</ul>
+{% endblock %}

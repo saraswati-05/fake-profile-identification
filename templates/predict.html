@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Test / Predict</h2>
+<h3>Upload CSV</h3>
+<form method="post" enctype="multipart/form-data" action="{{ url_for('predict_csv') }}">
+  <input type="file" name="csv_file" accept=".csv" required>
+  <button type="submit">Predict CSV</button>
+</form>
+
+<h3>Single Account Form</h3>
+<form method="post" action="{{ url_for('predict_single') }}">
+  <label>Followers</label><input name="followers" type="number" value="120">
+  <label>Following</label><input name="following" type="number" value="100">
+  <label>Posts</label><input name="posts" type="number" value="12">
+  <label>Account Age (days)</label><input name="account_age_days" type="number" value="365">
+  <label>Is Verified (0/1)</label><input name="is_verified" type="number" value="0">
+  <label>Average Likes</label><input name="avg_likes" type="number" value="15">
+  <label>Bio Length (chars)</label><input name="bio_length" type="number" value="80">
+  <label>Has Profile Pic (0/1)</label><input name="has_profile_pic" type="number" value="1">
+  <button type="submit">Predict One</button>
+</form>
+
+{% if table is defined %}
+  <h3>Results</h3>
+  <table class="table">
+    <thead><tr>
+      {% for c in table.columns %}<th>{{ c }}</th>{% endfor %}
+    </tr></thead>
+    <tbody>
+      {% for _, row in table.iterrows() %}
+        <tr>
+          {% for c in table.columns %}
+            <td>{{ row[c] }}</td>
+          {% endfor %}
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endif %}
+
+{% if single_result is defined %}
+  <p><strong>Predicted:</strong> {{ "Fake" if single_result.pred_label==1 else "Real" }} (prob_fake={{ "%.3f"|format(single_result.prob_fake) }})</p>
+{% endif %}
+{% endblock %}

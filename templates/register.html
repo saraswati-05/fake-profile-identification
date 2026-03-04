@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Register</h2>
+<form method="post">
+  <label>Full Name</label>
+  <input name="full_name" required>
+  <label>Email</label>
+  <input name="email" type="email" required>
+  <label>Phone</label>
+  <input name="phone" required>
+  <label>Username</label>
+  <input name="username" required>
+  <label>College</label>
+  <input name="college" required>
+  <label>Semester</label>
+  <input name="semester" required>
+  <label>Password</label>
+  <input name="password" type="password" required>
+  <button type="submit">Create account</button>
+</form>
+<p class="badge">Note: An admin must approve you before you can access training/testing.</p>
+{% endblock %}

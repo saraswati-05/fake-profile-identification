@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ title or "Fake Account Detector" }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  </head>
+  <body>
+    <div class="navbar">
+      <div class="navwrap container">
+        <div class="brand">Fake Account Detector</div>
+        <a class="navlink" href="{{ url_for('home') }}">Home</a>
+        {% if current_user.is_authenticated %}
+          <a class="navlink" href="{{ url_for('predict') }}">Test</a>
+          {% if current_user.is_admin %}
+            <a class="navlink" href="{{ url_for('admin') }}">Admin</a>
+            <a class="navlink" href="{{ url_for('train') }}">Training</a>
+            <a class="navlink" href="{{ url_for('graphs') }}">Graphs</a>
+            <a class="navlink" href="{{ url_for('users') }}">Users</a>
+          {% endif %}
+          <div class="spacer"></div>
+          <span class="badge"> {{ current_user.email }} </span>
+          <a class="navlink" href="{{ url_for('logout') }}">Logout</a>
+        {% else %}
+          <div class="spacer"></div>
+          <a class="navlink" href="{{ url_for('login') }}">Login</a>
+          <a class="navlink" href="{{ url_for('register') }}">Register</a>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="main container">
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          {% for m in messages %}
+            <div class="flash">{{ m }}</div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+      {% block content %}{% endblock %}
+    </div>
+  </body>
+</html>
