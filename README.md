@@ -141,8 +141,6 @@ Output:
 
 **Saraswati Sonale**
 
----
 
-## 📜 License
 
-This project is for **educational and research purposes**.
+
